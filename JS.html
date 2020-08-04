@@ -1,0 +1,36 @@
+<body>
+    <h1>Výpočet</h1>
+    <form>
+        mesini vklad: <input type="number" id="mesicniVklad"> <br>
+        predp. vynos: <input type="number" id="vynos"> <br>
+        inflace: <input type="number" id="inflace"><br>
+        pocet let: <input type="number" id="pocetLet"><hr>
+        <button onclick="vypocet()">Vypočítat</button>
+    </form>
+
+    <script>
+    function vypocet() {
+        var mesicniVklad = 1 * document.getElementById('mesicniVklad').value;
+        var vynos = 1 * document.getElementById('vynos').value;
+        var inflace = 1 * document.getElementById('inflace').value;
+        var pocetLet = 1 * document.getElementById('pocetLet').value;
+        var prispevekOdStatu = 0;
+        var nasporeno = 0;
+        var castka = 0;
+
+        var urok = 1+((vynos - inflace)/100);
+        if (mesicniVklad > 1000) {
+            prispevekOdStatu = 230;
+        }
+        if (mesicniVklad > 300 && mesicniVklad <= 1000) {
+            var prispevekOdStatu = (mesicniVklad-300) * 0.2 + 90;
+        }
+        castka = 12*(mesicniVklad+prispevekOdStatu);
+
+        for (var i = 0; i < pocetLet; i++) {
+           nasporeno = ((nasporeno + castka) * urok);
+        }
+        alert(Math.round(nasporeno));
+    }
+    </script>
+</body>
